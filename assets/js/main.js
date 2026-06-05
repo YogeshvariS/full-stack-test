@@ -3,7 +3,7 @@ $(document).ready(function () {
     function initializeSliders() {
 
         $('.content-slider').slick({
-            arrows: true,
+            arrows: false,
             fade: true,
             infinite: false,
             asNavFor: '.image-slider'
@@ -14,6 +14,14 @@ $(document).ready(function () {
             fade: true,
             infinite: false,
             asNavFor: '.content-slider'
+        });
+
+        $('.prev-arrow').click(function () {
+            $('.content-slider').slick('slickPrev');
+        });
+
+        $('.next-arrow').click(function () {
+            $('.content-slider').slick('slickNext');
         });
 
     }
@@ -45,8 +53,7 @@ $(document).ready(function () {
 
                 let title = $(this).data('title');
                 let description = $(this).data('description');
-                let image = $(this).data('image');
-
+                let image = window.location.origin + '/full-stack-test/' + $(this).data('image');
                 // Content slide
 
                 $('.content-slider').append(`
@@ -100,5 +107,68 @@ $(document).ready(function () {
         loadSlides(categoryId);
 
     });
+
+    function loadMobileSliders() {
+
+        $('.mobile-slider').each(function () {
+
+            let categoryId = $(this).data('category');
+
+            let slider = $(this);
+
+            slider.html('');
+
+            $('.slide-data').each(function () {
+
+                let slideCategory = $(this).data('category');
+
+                if (slideCategory == categoryId) {
+
+                    let title = $(this).data('title');
+                    let description = $(this).data('description');
+                    let image = window.location.origin + '/full-stack-test/' + $(this).data('image');
+                    slider.append(`
+
+                        <div class="mobile-slide">
+
+                            <div
+                                class="mobile-slide-bg"
+
+                                style="background-image: url('${image}');"
+                            >
+
+                                <div class="mobile-overlay">
+
+                                    <h2>${title}</h2>
+
+                                    <p>${description}</p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    `);
+                }
+
+            });
+
+            slider.slick({
+                arrows: false,
+                dots: true,
+                infinite: false
+            });
+
+        });
+
+    }
+
+    loadMobileSliders();   
+    $('#mobileAccordion').on('shown.bs.collapse', function () {
+
+        $('.mobile-slider').slick('setPosition');
+
+    }); 
 
 });
