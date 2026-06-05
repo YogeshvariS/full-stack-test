@@ -3,7 +3,8 @@
 include 'config/db.php';
 include 'includes/header.php';
 
-$categories = mysqli_query($conn,
+$categories = mysqli_query(
+    $conn,
     "SELECT * FROM categories ORDER BY id ASC"
 );
 
@@ -39,9 +40,8 @@ $categories = mysqli_query($conn,
                 <?php
 
                     $count++;
-                }
 
-                ?>
+                } ?>
 
             </div>
 
@@ -51,36 +51,7 @@ $categories = mysqli_query($conn,
 
         <div class="col-lg-5 mb-4">
 
-            <div class="content-slider">
-
-                <?php
-
-                $slides = mysqli_query($conn,
-                    "SELECT * FROM slides ORDER BY id ASC"
-                );
-
-                while($slide = mysqli_fetch_assoc($slides)) {
-
-                ?>
-
-                    <div
-                        class="slide-item"
-                        data-category="<?php echo $slide['category_id']; ?>"
-                    >
-
-                        <h2>
-                            <?php echo $slide['title']; ?>
-                        </h2>
-
-                        <p>
-                            <?php echo $slide['description']; ?>
-                        </p>
-
-                    </div>
-
-                <?php } ?>
-
-            </div>
+            <div class="content-slider"></div>
 
         </div>
 
@@ -88,37 +59,43 @@ $categories = mysqli_query($conn,
 
         <div class="col-lg-4 mb-4">
 
-            <div class="image-slider">
-
-                <?php
-
-                $images = mysqli_query($conn,
-                    "SELECT * FROM slides ORDER BY id ASC"
-                );
-
-                while($image = mysqli_fetch_assoc($images)) {
-
-                ?>
-
-                    <div
-                        class="image-item"
-                        data-category="<?php echo $image['category_id']; ?>"
-                    >
-
-                        <img
-                            src="uploads/<?php echo $image['image']; ?>"
-                            alt=""
-                        >
-
-                    </div>
-
-                <?php } ?>
-
-            </div>
+            <div class="image-slider"></div>
 
         </div>
 
     </div>
+
+</div>
+
+<!-- Hidden Slides Data -->
+
+<div id="slides-data" style="display:none;">
+
+<?php
+
+$allSlides = mysqli_query(
+    $conn,
+    "SELECT * FROM slides ORDER BY id ASC"
+);
+
+while($slide = mysqli_fetch_assoc($allSlides)) {
+
+?>
+
+    <div
+        class="slide-data"
+
+        data-category="<?php echo $slide['category_id']; ?>"
+
+        data-title="<?php echo htmlspecialchars($slide['title']); ?>"
+
+        data-description="<?php echo htmlspecialchars($slide['description']); ?>"
+
+        data-image="uploads/<?php echo $slide['image']; ?>"
+    >
+    </div>
+
+<?php } ?>
 
 </div>
 
