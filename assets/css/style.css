@@ -1,0 +1,12 @@
+body {
+    background: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+.custom-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    min-height: 300px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
