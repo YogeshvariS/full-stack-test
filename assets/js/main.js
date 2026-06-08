@@ -53,7 +53,10 @@ $(document).ready(function () {
 
                 let title = $(this).data('title');
                 let description = $(this).data('description');
-                let image = window.location.origin + '/full-stack-test/' + $(this).data('image');
+
+                // FIXED IMAGE PATH
+                let image = $(this).data('image');
+
                 // Content slide
 
                 $('.content-slider').append(`
@@ -126,7 +129,10 @@ $(document).ready(function () {
 
                     let title = $(this).data('title');
                     let description = $(this).data('description');
-                    let image = window.location.origin + '/full-stack-test/' + $(this).data('image');
+
+                    // FIXED IMAGE PATH
+                    let image = $(this).data('image');
+
                     slider.append(`
 
                         <div class="mobile-slide">
@@ -164,11 +170,12 @@ $(document).ready(function () {
 
     }
 
-    loadMobileSliders();   
+    loadMobileSliders();
+
     $('#mobileAccordion').on('shown.bs.collapse', function () {
 
         $('.mobile-slider').slick('setPosition');
 
-    }); 
+    });
 
 });

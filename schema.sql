@@ -1,0 +1,13 @@
+CREATE TABLE categories (
+id INT AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE slides (
+id INT AUTO_INCREMENT PRIMARY KEY,
+category_id INT NOT NULL,
+title VARCHAR(255),
+description TEXT,
+image VARCHAR(255),
+FOREIGN KEY (category_id) REFERENCES categories(id)
+);
